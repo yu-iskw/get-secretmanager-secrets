@@ -63,15 +63,11 @@ export class Client {
   readonly client: HttpClient;
 
   constructor(opts?: ClientOptions) {
-    //Impersonate the service account if provided
-    const clientOptions: ImpersonatedOptions = {};
-    if (opts?.impersonateServiceAccount) {
-      clientOptions.targetPrincipal = opts.impersonateServiceAccount;
-    }
-
     this.auth = new GoogleAuth({
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
-      clientOptions,
+      clientOptions: {
+        subject: opts?.impersonateServiceAccount,
+      },
     });
     this.client = new HttpClient(userAgent, [], {
       allowRetries: true,
