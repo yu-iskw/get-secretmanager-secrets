@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { GoogleAuth, ImpersonatedOptions } from 'google-auth-library';
+import { GoogleAuth } from 'google-auth-library';
 import { errorMessage, expandUniverseEndpoints } from '@google-github-actions/actions-utils';
 import { HttpClient } from '@actions/http-client';
 
@@ -69,7 +69,7 @@ export class Client {
         subject: opts?.impersonateServiceAccount,
       },
     });
-    console.log('auth', this.auth);
+    console.info('auth', this.auth);
     this.client = new HttpClient(userAgent, [], {
       allowRetries: true,
       maxRetries: 3,
