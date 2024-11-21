@@ -66,7 +66,8 @@ export class Client {
     this.auth = new GoogleAuth({
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
       clientOptions: {
-        subject: opts?.impersonateServiceAccount,
+        targetPrincipal: opts?.impersonateServiceAccount,
+        targetScopes: ['https://www.googleapis.com/auth/cloud-platform'],
       },
     });
     console.log('auth', this.auth);
@@ -98,8 +99,6 @@ export class Client {
 
     try {
       const token = await this.auth.getAccessToken();
-      console.log('auth:', this.auth.getCredentials());
-      console.log('auth:', this.auth.getRequestHeaders());
       console.log('endpoint:', `${endpoint}/${selfLink}:access`);
       const response = await this.client.get(`${endpoint}/${selfLink}:access`, {
         'Authorization': `Bearer ${token}`,
