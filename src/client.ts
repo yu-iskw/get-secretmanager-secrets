@@ -69,7 +69,7 @@ export class Client {
         subject: opts?.impersonateServiceAccount,
       },
     });
-    console.info('auth', this.auth);
+    console.log('auth', this.auth);
     this.client = new HttpClient(userAgent, [], {
       allowRetries: true,
       maxRetries: 3,
