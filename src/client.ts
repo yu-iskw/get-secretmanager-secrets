@@ -100,7 +100,7 @@ export class Client {
       const token = await this.auth.getAccessToken();
       console.log('auth:', this.auth.getCredentials());
       console.log('auth:', this.auth.getRequestHeaders());
-      console.log('endpoint:', endpoint);
+      console.log('endpoint:', `${endpoint}/${selfLink}:access`);
       const response = await this.client.get(`${endpoint}/${selfLink}:access`, {
         'Authorization': `Bearer ${token}`,
         'User-Agent': userAgent,
