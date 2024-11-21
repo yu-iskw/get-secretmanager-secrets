@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { GoogleAuth } from 'google-auth-library';
+import { GoogleAuth, Impersonated } from 'google-auth-library';
 import { errorMessage, expandUniverseEndpoints } from '@google-github-actions/actions-utils';
 import { HttpClient } from '@actions/http-client';
 
@@ -66,7 +66,8 @@ export class Client {
     this.auth = new GoogleAuth({
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
       clientOptions: {
-        targetPrincipal: opts?.impersonateServiceAccount,
+        subject: opts?.impersonateServiceAccount,
+        // targetPrincipal: opts?.impersonateServiceAccount,
         targetScopes: ['https://www.googleapis.com/auth/cloud-platform'],
       },
     });
